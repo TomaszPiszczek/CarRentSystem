@@ -1,6 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
+using CarRentSystem.Nowy_folder;
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
+var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+builder.Services.AddDbContext<RentCarDb>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

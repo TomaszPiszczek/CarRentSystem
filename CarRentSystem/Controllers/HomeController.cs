@@ -1,4 +1,5 @@
 ﻿using CarRentSystem.Models;
+using CarRentSystem.Nowy_folder;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,17 @@ namespace CarRentSystem.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly RentCarDb _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(RentCarDb context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cars = _context.Cars.ToList();
+            return View(cars);
         }
 
         public IActionResult Privacy()
