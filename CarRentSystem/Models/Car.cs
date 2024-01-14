@@ -25,7 +25,6 @@ namespace CarRentSystem.Models
         [Required]
         public bool avaliable { get; set; }
 
-        // Dodaj właściwość nawigacyjną Rentals
         public ICollection<Rentals> Rentals { get; set; }
     }
 }

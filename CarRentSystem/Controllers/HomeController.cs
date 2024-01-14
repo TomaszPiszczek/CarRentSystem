@@ -38,19 +38,19 @@ namespace CarRentSystem.Controllers
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, existingUser.name),
-            new Claim("password", existingUser.password), // Dodaj claim z hasłem
+            new Claim("password", existingUser.password), 
            new Claim("id", Convert.ToString(existingUser.user_id)),
            new Claim("IsAdmin", existingUser.is_admin.ToString()),
-            // Dodaj inne claimy w razie potrzeby
+            
         };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 var authProperties = new AuthenticationProperties
                 {
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(20), // Czas ważności sesji
-                    IsPersistent = true, // Czy sesja powinna być trwała nawet po zamknięciu przeglądarki
-                    RedirectUri = "/Home/rent.cshtml" // Przekierowanie po poprawnym zalogowaniu
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(20), 
+                    IsPersistent = true,
+                    RedirectUri = "/Home/rent.cshtml" 
                 };
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);

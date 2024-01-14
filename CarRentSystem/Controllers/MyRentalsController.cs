@@ -59,7 +59,7 @@ public class MyRentalsController : Controller
         })
         .ToList();
 
-        // Przekaż dane do widoku przez ViewBag
+        
         ViewBag.MyRentals = myRentalViewModels;
 
         return View("MyRentals");
