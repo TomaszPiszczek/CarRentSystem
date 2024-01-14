@@ -1,0 +1,19 @@
+﻿@model Tuple<User, User>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (ViewBag.RegisterErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.RegisterErrorMessage</p>
+    }
+    @if (ViewBag.LoginErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.LoginErrorMessage</p>
+    }
+  
+    <br>
+    <form method="post" action="/Home/ContinueWithoutLogin">
+        <button type="submit">Kontynuuj bez logowania</button>
+    </form>
+</div>

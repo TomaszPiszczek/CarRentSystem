@@ -1,0 +1,61 @@
+﻿@model Tuple<User, User>
+
+<div class="text-center">
+    <h1 class="display-4">Wypożyczanie Samochodów</h1>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+
+    <h2>Dostępne Samochody</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Marka</th>
+                <th>Model</th>
+                <th>Rok Produkcji</th>
+                <th>Cena dzienna</th>
+                <th>Dostępność</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.Cars != null)
+            {
+                @foreach (var car in ViewBag.Cars)
+                {
+                    <tr>
+                        <td>@car.brand</td>
+                        <td>@car.model</td>
+                        <td>@car.production_date</td>
+                        <td>@car.daily_fee</td>
+                        <td>@(car.avaliable ? "Dostępny" : "Niedostępny")</td>
+                        <td>
+                            @if (car.avaliable)
+                            {
+                                <form method="post" action="/Rent/RentCar">
+                                    <input type="hidden" name="carId" value="@car.car_id" />
+                                    <label for="startDate">Data Rozpoczęcia:</label>
+                                    <input type="date" id="startDate" name="startDate" required />
+                                    <label for="endDate">Data Zakończenia:</label>
+                                    <input type="date" id="endDate" name="endDate" required />
+                                    <button type="submit">Wynajmij</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <button disabled>Zarezerwowane</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

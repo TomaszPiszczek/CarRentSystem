@@ -1,14 +1,50 @@
-﻿@model List<Car>
+﻿@model Tuple<User, User>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (ViewBag.RegisterErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.RegisterErrorMessage</p>
+    }
+    @if (ViewBag.LoginErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.LoginErrorMessage</p>
+    }
 
-    <h2>Samochody:</h2>
-    <ul>
-        @foreach (var car in Model)
-        {
-            <li>@car.brand - @car.model</li>
-        }
-    </ul>
+    <h2>Logowanie:</h2>
+    <form method="post" action="/Home/Login">
+        <label for="loginName">Nazwa użytkownika:</label>
+        <input type="text" id="loginName" name="name" required>
+        <br>
+        <label for="loginPassword">Hasło:</label>
+        <input type="password" id="loginPassword" name="password" required>
+        <br>
+        <button type="submit">Zaloguj</button>
+    </form>
+
+    <h2>Rejestracja:</h2>
+    <form method="post" action="/Home/Register">
+        <label for="registerName">Nazwa użytkownika:</label>
+        <input type="text" id="registerName" name="name" pattern=".{6,}" title="Nazwa użytkownika musi mieć co najmniej 6 znaków." required>
+        <br>
+        <label for="registerSurname">Nazwisko:</label>
+        <input type="text" id="registerSurname" name="surname" required>
+        <br>
+        <label for="registerAddress">Adres:</label>
+        <input type="text" id="registerAddress" name="adress" required>
+        <br>
+        <label for="registerPhoneNumber">Numer telefonu:</label>
+        <input type="tel" id="registerPhoneNumber" name="phone_number" pattern="[0-9]+" title="Numer telefonu musi składać się tylko z cyfr." required>
+        <br>
+        <label for="registerPassword">Hasło:</label>
+        <input type="password" id="registerPassword" name="password" pattern="(?=.*[A-Z]).{8,}" title="Hasło musi mieć co najmniej 8 znaków, w tym przynajmniej jedną dużą literę." required>
+        <br>
+        <button type="submit">Zarejestruj</button>
+    </form>
+
+    <br>
+    <form method="post" action="/home/ContinueWithoutLogin">
+        <button type="submit">Kontynuuj bez logowania</button>
+    </form>
 </div>

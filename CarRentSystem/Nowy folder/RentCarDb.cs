@@ -10,5 +10,8 @@ namespace CarRentSystem.Nowy_folder
         }
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Rentals> Rentals { get; set; }
+        public DbSet<Client> Clients { get; set; }  
     }
 }
