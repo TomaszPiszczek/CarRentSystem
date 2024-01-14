@@ -1,16 +1,39 @@
 ﻿@model Tuple<User, User>
+<form method="post" action="/Rent/Logout">
+    <button type="submit">Wyloguj</button>
+</form>
+
+<h2>Dodaj nowy samochód</h2>
+<form method="post" action="/Rent/AddCar">
+    <div class="form-group">
+        <label for="brand">Marka:</label>
+        <input type="text" id="brand" name="brand" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="productionDate">Rok Produkcji:</label>
+        <input type="number" id="productionDate" name="productionDate" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="dailyFee">Cena dzienna:</label>
+        <input type="number" id="dailyFee" name="dailyFee" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="available">Dostępność:</label>
+        <select id="available" name="available" class="form-control" required>
+            <option value="true">Dostępny</option>
+            <option value="false">Niedostępny</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj samochód</button>
+</form>
 
 <div class="text-center">
     <h1 class="display-4">Wypożyczanie Samochodów</h1>
-    @if (ViewBag.ErrorMessage != null)
-    {
-        <p class="text-danger">@ViewBag.ErrorMessage</p>
-    }
-
-    @if (ViewBag.ErrorMessage != null)
-    {
-        <p class="text-danger">@ViewBag.ErrorMessage</p>
-    }
+   
 
     <h2>Dostępne Samochody</h2>
     <table class="table">
@@ -49,13 +72,48 @@
                             }
                             else
                             {
-                                <button disabled>Zarezerwowane</button>
+                                <button disabled>Niedostępne</button>
                             }
                         </td>
+                        <td>
+                            <strong>Zajęte Terminy:</strong>
+                            <form method="get" action="/Rent/GetOccupiedDates">
+                                <input type="hidden" name="carId" value="@car.car_id" />
+                                <button type="submit">Zajęte Terminy</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="/Rent/DeleteCar">
+                                <input type="hidden" name="carId" value="@car.car_id" />
+                                <button type="submit">Usuń</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="/Rent/ToggleAvailability">
+                                <input type="hidden" name="carId" value="@car.car_id" />
+                                <button type="submit">Zmień dostępność</button>
+                            </form>
+                        </td>
+
                     </tr>
                 }
             }
 
         </tbody>
     </table>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+    @if (ViewBag.RentedMessage != null)
+    {
+        <div class="alert alert-success">
+            <p>@ViewBag.RentedMessage</p>
+        </div>
+    }
+    <form method="post" action="/MyRentals/MyRentals">
+        <button type="submit">Moje wynajmy</button>
+    </form>
+
+
 </div>

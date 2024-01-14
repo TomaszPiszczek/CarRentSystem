@@ -1,8 +1,7 @@
 ﻿@model Tuple<User, User>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
     @if (ViewBag.RegisterErrorMessage != null)
     {
         <p class="text-danger">@ViewBag.RegisterErrorMessage</p>
@@ -44,7 +43,7 @@
     </form>
 
     <br>
-    <form method="post" action="/home/ContinueWithoutLogin">
+    <form method="post" action="/Rent/Index">
         <button type="submit">Kontynuuj bez logowania</button>
     </form>
 </div>

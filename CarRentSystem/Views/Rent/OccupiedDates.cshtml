@@ -1,0 +1,9 @@
+﻿@model List<DateTime>
+
+<h2>Zajęte Terminy</h2>
+<ul>
+    @foreach (var date in ViewBag.OccupiedDates)
+    {
+        <li>@date.ToShortDateString()</li>
+    }
+</ul>

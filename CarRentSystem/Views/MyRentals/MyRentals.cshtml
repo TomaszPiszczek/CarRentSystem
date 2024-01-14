@@ -1,0 +1,40 @@
+﻿@model List<MyRentalViewModel>
+
+<!-- ... reszta kodu ... -->
+
+<tbody>
+    @if (ViewBag.MyRentals == null || ((List<MyRentalViewModel>)ViewBag.MyRentals).Count == 0)
+    {
+        <tr>
+            <td colspan="6">Brak wynajmów do wyświetlenia.</td>
+        </tr>
+    }
+    else
+    {
+        @foreach (var rental in (List<MyRentalViewModel>)ViewBag.MyRentals)
+        {
+            <tr>
+                <td>@rental.Brand</td>
+                <td>@rental.Model</td>
+                <td>@rental.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@rental.EndDate.ToString("yyyy-MM-dd")</td>
+                <td>@rental.Price.ToString("C")</td>
+
+                <td>
+                    @if (rental.CanCancel)
+                    {
+                        <form method="post" action="/MyRentals/CancelRental">
+                            <input type="hidden" name="rentalId" value="@rental.RentalId" />
+                            <button class="btn btn-danger" type="submit">Anuluj zamówienie</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="btn btn-danger" disabled>Anuluj zamówienie</button>
+                    }
+                </td>
+
+            </tr>
+        }
+    }
+</tbody>

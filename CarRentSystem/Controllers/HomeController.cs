@@ -39,7 +39,8 @@ namespace CarRentSystem.Controllers
         {
             new Claim(ClaimTypes.Name, existingUser.name),
             new Claim("password", existingUser.password), // Dodaj claim z hasłem
-           new Claim("id", Convert.ToString(existingUser.user_id))
+           new Claim("id", Convert.ToString(existingUser.user_id)),
+           new Claim("IsAdmin", existingUser.is_admin.ToString()),
             // Dodaj inne claimy w razie potrzeby
         };
 
